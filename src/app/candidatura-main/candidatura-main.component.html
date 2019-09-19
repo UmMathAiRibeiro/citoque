@@ -1,0 +1,379 @@
+<div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="home">CITEC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="home">Agendas</a>
+        <a class="nav-item nav-link active" href="candidatura">Candidatura<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="avaliacao">Avaliação</a>
+        <a class="nav-item nav-link" href="http://cronograma.fiecdev.kinghost.net/#/login">Gestão de projetos</a>
+        <a class="nav-item nav-link" href="processos">Processos</a>
+        <a class="nav-item nav-link" href="projetos">Projetos</a>
+        <a (click)="sair()" class="material-icons nav-item nav-link">
+          exit_to_app
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist" style="justify-content: center;">
+    <a class="nav-item nav-link active" id="nav-TCC-Startup-tab" data-toggle="tab" href="#nav-TCC-Startup" role="tab"
+      aria-controls="nav-TCC-Startup" aria-selected="true">TCC Startup</a>
+    <a class="nav-item nav-link" id="nav-projeto-tab" data-toggle="tab" href="#nav-projeto" role="tab"
+      aria-controls="nav-projeto" aria-selected="false">Projeto</a>
+  </div>
+</nav>
+<div class="tab-content mt-4" id="nav-tabContent" style="justify-content: center;">
+  <div class="tab-pane fade show active" id="nav-TCC-Startup" role="tabpanel" aria-labelledby="nav-TCC-Startup-tab">
+    <div class="container">
+      <div class="shadow p-1 mb-1 bg-light">
+        <div class="card bg-light text-dark border-0">
+          <div class="card-header text-center bg-light h2">TCC Startup</div>
+          <div class="card-body bg-light some-padding">
+            <form class="font120">
+              <div class="row form-group">
+                <div class="col">
+                  <label for="select-curso" class="text-dark">Curso FIEC</label>
+                  <select class="form-control text-dark font100" [(ngModel)]="tcc.curso"
+                    [ngModelOptions]="{standalone: true}" id=" select-curso">
+                    <option value="informatica">Informática</option>
+                    <option value="edificacoes">Edificações</option>
+                    <option value="farmacia">Farmácia</option>
+                    <option value="quimica">Química</option>
+                    <option value="enfermagem">Enfermagem</option>
+                    <option value="design">Design</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="select-periodo-curso" class="text-dark ">
+                    Periodo
+                  </label>
+                  <select class="form-control text-dark font100" [(ngModel)]="tcc.periodo"
+                    [ngModelOptions]="{standalone: true}" id="select-periodo-curso">
+                    <option value="vespertino">Vespertino</option>
+                    <option value="noturno">Noturno</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row form-group">
+                <div class="col">
+                  <label for="select-modulo-curso" class="text-dark ">
+                    Módulo
+                  </label>
+                  <select class="form-control text-dark font100" [(ngModel)]="tcc.modulo"
+                    [ngModelOptions]="{standalone: true}" id="select-modulo-curso">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                  </select>
+                </div>
+                <div class="col">
+                  <label for="select-turma-curso" class="text-dark ">
+                    Turma
+                  </label>
+                  <select class="form-control text-dark font100" [(ngModel)]="tcc.turma"
+                    [ngModelOptions]="{standalone: true}" id="select-turma-curso">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div>
+                  <!-- [(ngModel)]="tcc" [ngModelOptions]="{standalone: true}" -->
+                  <label class="text-dark ">
+                    Modalidade
+                  </label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input btn-dark" name="radio-group-modalidade-curso"
+                    id="radio-modalidade-regular" value="regular" #regular>
+                  <label class="custom-control-label" for="radio-modalidade-regular">Regular</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input type="radio" class="custom-control-input" id="radio-modalidade-mediotec"
+                    name="radio-group-modalidade-curso" value="mediotec" #mediotec>
+                  <label class="custom-control-label" for="radio-modalidade-mediotec">Mediotec</label>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="nome-rojeto" class="text-dark">Nome do Projeto</label>
+                <input type="text" class="form-control text-dark font100" id="input-nome-projeto"
+                  placeholder="Digite o nome do projeto" [(ngModel)]="tcc.nomeProjeto"
+                  [ngModelOptions]="{standalone: true}" />
+              </div>
+
+              <div class="form-group">
+                <label for="nome-rojeto" class="text-dark ">Nome do Responsável</label>
+                <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                  placeholder="Digite o nome do responsável geral do projeto" [(ngModel)]="tcc.nomeResponsavel"
+                  [ngModelOptions]="{standalone: true}" />
+              </div>
+
+              <div class="form-group">
+                <label for="tipo-projeto" class="text-dark ">Tipo do Projeto</label>
+                <select class="form-control text-dark font100" id="select-tipo-projeto" [(ngModel)]="tcc.tipo"
+                  [ngModelOptions]="{standalone: true}">
+                  <option value="software">Software</option>
+                  <option value="design">Design</option>
+                  <option value="jogo">Jogo</option>
+                  <option value="remedio">Remédio</option>
+                  <option value="maquina">Máquina</option>
+                  <option value="produto">Produto</option>
+                  <option value="servico">Serviço</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="desc-projeto" class="text-dark ">Resumo do Projeto</label>
+                <textarea class="form-control text-dark font100" id="textarea-desc-projeto" rows="3" maxlength="1000"
+                  placeholder="máx. 1000 caraceteres" [(ngModel)]="tcc.resumo" [ngModelOptions]="{standalone:
+                  true}"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="desc-projeto" class="text-dark ">Descrição do Projeto</label>
+                <textarea class="form-control text-dark font100" id="textarea-desc-projeto" rows="3"
+                  placeholder="Detalhes da proposta" [(ngModel)]="tcc.descricao"
+                  [ngModelOptions]="{standalone: true}"></textarea>
+                <!-- nao quebrar a linha senao textarea sera preenchida com espaços em branco e
+                                                     o placeholder não aparecerá -->
+              </div>
+
+              <div class="form-group">
+                <label for="desc-projeto" class="text-dark ">Equipe do Projeto</label>
+                <textarea class="form-control text-dark font100" id="textarea-equipe-projeto" rows="3" maxlength="500"
+                  placeholder="Nome completo de cada integrante" [(ngModel)]="tcc.equipe" [ngModelOptions]="{standalone:
+                  true}"></textarea>
+                <!-- nao quebrar a linha senao textarea sera preenchida com espaços em branco e
+                                                     o placeholder não aparecerá -->
+              </div>
+            </form>
+          </div> <!-- / card-body -->
+        </div> <!-- / card  -->
+      </div>
+      <div class="d-flex justify-content-end mt-4 mb-4">
+        <div class="mr-3">
+          <button type="button" class="btn btn-light border">
+            Cancelar
+          </button>
+        </div>
+        <div>
+          <button type="button" (click)="testar()" class="btn btn-light border">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div> <!-- / container -->
+  </div>
+  <div class="tab-pane fade" id="nav-projeto" role="tabpanel" aria-labelledby="nav-projeto-tab">
+    <div class="container">
+      <div class="accordion shadow p-1 mb-1 bg-light" id="accordion-box">
+        <!-- INTERNA -->
+        <div class="card bg-light border-0">
+          <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#div-startup-interna">
+
+            <div class="card-header bg-light">
+              <h4 class="mb-0 text-center">
+                <a class="underline h2">Interno</a>
+              </h4>
+            </div>
+          </button>
+
+          <div id="div-startup-interna" class="collapse" data-parent="#accordion-box">
+            <div class="card-body bg-light">
+              <form class="font120">
+                <div class="form-group">
+                  <label for="curso-fiec" class="text-dark ">Curso FIEC</label>
+                  <select class="form-control text-dark font100" id="select-curso-fiec">
+                    <option>Informática</option>
+                    <option>Edificações</option>
+                    <option>Farmácia</option>
+                    <option>Química</option>
+                    <option>Enfermagem</option>
+                    <option>Design</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="nome-rojeto" class="text-dark ">Nome do Projeto</label>
+                  <input type="text" class="form-control text-dark font100" id="input-nom-projeto"
+                    placeholder="Nome do projeto" />
+                </div>
+
+                <div class="form-group">
+                  <label for="nome-rojeto" class="text-dark ">Nome do Responsável</label>
+                  <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                    placeholder="Nome do responsável geral do projeto" />
+                </div>
+
+                <div class="form-group">
+                  <label for="tipo-projeto" class="text-dark ">Tipo do Projeto</label>
+                  <select class="form-control text-dark font100" id="select-tipo-projeto">
+                    <option>Software</option>
+                    <option>Design</option>
+                    <option>Jogo</option>
+                    <option>Remédio</option>
+                    <option>Máquina</option>
+                    <option>Produto</option>
+                    <option>Serviço</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Resumo do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-desc-projeto" rows="3" maxlength="1000"
+                    placeholder="máx. 1000 caraceteres"></textarea>
+                  <!-- nao quebrar a linha senao textarea sera preenchida com espaços em branco e
+                                                                 o placeholder não aparecerá -->
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Descrição do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-desc-projeto" rows="3"
+                    placeholder="Detalhes da proposta"></textarea>
+                  <!-- nao quebrar a linha senao textarea sera preenchida com espaços em branco e
+                                                                    o placeholder não aparecerá -->
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Equipe do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-equipe-projeto" rows="3"
+                    maxlength="1000" placeholder="Nome completo de cada integrante"></textarea>
+                  <!-- nao quebrar a linha senao textarea sera preenchida com espaços em branco e
+                                                                 o placeholder não aparecerá -->
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> <!-- / INTERNA -->
+
+        <!-- EXTERNA -->
+        <div class="card bg-light border-0">
+          <button class="btn" type="button" data-toggle="collapse" data-target="#div-startup-externa">
+
+            <div class="card-header bg-light">
+              <h4 class="mb-0 text-center">
+                <a class="underline h2">Externo</a>
+              </h4>
+            </div>
+
+          </button>
+
+          <div id="div-startup-externa" class="collapse" data-parent="#accordion-box">
+            <div class="card-body bg-light">
+              <form class="font120">
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="solicitante" class="text-dark ">Solicitante</label>
+                    <input type="text" class="form-control text-dark font100" id="input-solicitante"
+                      placeholder="Nome da instituição">
+                  </div>
+                  <div class="col">
+                    <label for="tipo-solicitante" class="text-dark ">Filiação</label>
+                    <select class="form-control text-dark font100" id="select-tipo-solicitante">
+                      <option>Empresa Privada</option>
+                      <option>Orgão Público</option>
+                      <option>Associação/Comunidade</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="nome-responsavel" class="text-dark ">Nome do Responsável</label>
+                    <input type="text" class="form-control text-dark font100" id="input-nom-projeto"
+                      placeholder="Nome do responsável pelo projeto">
+                  </div>
+                  <div class="col">
+                    <label for="telefone-responsavel" class="text-dark ">Telefone do Responsável</label>
+                    <input type="text" class="form-control text-dark font100" id="input-nom-projeto"
+                      placeholder="Número de telefone do responsável pelo projeto">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col-sm-6">
+                    <label for="email-responsavel" class="text-dark ">E-mail do Responsável</label>
+                    <input type="email" class="form-control text-dark font100" id="input-nom-projeto"
+                      placeholder="Endereço de e-mail do responsável pelo projeto">
+                  </div>
+                </div>
+
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="nome-rojeto" class="text-dark ">Nome do Projeto</label>
+                    <input type="text" class="form-control text-dark font100" id="input-nom-projeto"
+                      placeholder="Nome do projeto">
+                  </div>
+                  <div class="col">
+                    <label for="input-remuneracao" class="text-dark ">Remuneração</label>
+                    <input type="text" class="form-control text-dark font100" id="input-remuneracao"
+                      placeholder="R$ 9999,99">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="tipo-projeto" class="text-dark ">Tipo do Projeto</label>
+                  <select class="form-control text-dark font100" id="select-tipo-projeto">
+                    <option>Software</option>
+                    <option>Design</option>
+                    <option>Jogo</option>
+                    <option>Remédio</option>
+                    <option>Máquina</option>
+                    <option>Produto</option>
+                    <option>Serviço</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Resumo do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-desc-projeto" rows="3" maxlength="1000"
+                    placeholder="máx. 1000 caraceteres"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Descrição do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-equipe-projeto" rows="3"
+                    placeholder="Detalhes da proposta"></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Equipe do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-equipe-projeto" rows="3"
+                    maxlength="1000" placeholder="Nome completo de cada integrante"></textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div> <!--  /EXTERNA -->
+      </div> <!-- / accordion -->
+      <div class="d-flex justify-content-end mt-4 mb-4">
+        <div class="mr-3">
+          <button type="button" class="btn btn-light border">
+            Cancelar
+          </button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-light border">
+            Confirmar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

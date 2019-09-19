@@ -1,0 +1,254 @@
+<div class="border-bottom mb-4">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="home">CITEC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="home">Agendas</a>
+        <a class="nav-item nav-link" href="candidatura">Candidatura</a>
+        <a class="nav-item nav-link active" href="avaliacao">Avaliação<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="http://cronograma.fiecdev.kinghost.net/#/login">Gestão de projetos</a>
+        <a class="nav-item nav-link" href="processos">Processos</a>
+        <a class="nav-item nav-link" href="projetos">Projetos</a>
+        <a (click)="sair()" class="material-icons nav-item nav-link">
+          exit_to_app
+        </a>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  <div class="accordion shadow p-1 mb-1 bg-light" id="accordion-box">
+    <div class="card bg-light border-0">
+      <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#div-em-avaliacao">
+
+        <div class="card-header bg-light">
+          <h4 class="mb-0 text-center">
+            <a class="underline h2">Em avaliação</a>
+          </h4>
+        </div>
+      </button>
+
+      <div id="div-em-avaliacao" class="collapse show" data-parent="#accordion-box">
+        <div class="card-body bg-light table-responsive">
+          <table class="table table-bordered text-dark table-hover text-center">
+            <thead class="thead-light">
+              <th scope="col">Nome do Projeto</th>
+              <th scope="col">Tipo de Projeto</th>
+              <th scope="col">Proposta</th>
+              <th scope="col">Origem</th>
+              <th scope="col">Aprovar?</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="clickable-td" data-toggle="modal" data-target="#modal-projeto-A">Projeto A</td>
+                <td>TCC Startup</td>
+                <td>Descrição do Projeto A...</td>
+                <td>Química</td>
+                <td class="clickable-td">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="checkbox-aprovar-A">
+                    <label class="custom-control-label" for="checkbox-aprovar-A"></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="clickable-td">Projeto B</td>
+                <td>Solicitação interna</td>
+                <td>Descrição do Projeto B...</td>
+                <td>Informática</td>
+                <td class="clickable-td">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="checkbox-aprovar-B">
+                    <label class="custom-control-label" for="checkbox-aprovar-B"></label>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="clickable-td">Projeto C</td>
+                <td>Solicitação externa</td>
+                <td>Descrição do Projeto C...</td>
+                <td>Empresa XYZ</td>
+                <td class="clickable-td">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="checkbox-aprovar-C">
+                    <label class="custom-control-label" for="checkbox-aprovar-C"></label>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="d-flex justify-content-end">
+            <div class="mr-3">
+              <button type="button" class="btn btn-light border">
+                Cancelar
+              </button>
+            </div>
+            <div>
+              <button type="button" class="btn btn-light border">
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div> <!-- / card-body -->
+      </div>
+
+      <div class="modal fade text-dark" id="modal-projeto-A" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-body">
+              <form class="font120">
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="curso-fiec" class="text-dark ">Curso FIEC</label>
+                    <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                      value="Química" readonly>
+                  </div>
+                  <div class="col">
+                    <label for="select-periodo-fiec" class="text-dark ">
+                      Periodo
+                    </label>
+                    <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                      value="Noturno" readonly>
+                  </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col">
+                    <label for="select-turma-fiec" class="text-dark ">
+                      Módulo
+                    </label>
+                    <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                      value="1" readonly>
+                  </div>
+                  <div class="col">
+                    <label for="select-turma-fiec" class="text-dark ">
+                      Turma
+                    </label>
+                    <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                      value="C" readonly>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <div>
+                    <label class="text-dark ">
+                      Modalidade
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input type="radio" class="form-check-input" name="radio-group-modalidade-curso"
+                      id="radio-modalidade-mediotec" checked="true" readonly>
+                    <label class="form-check-label" for="radio-modalidade-mediotec">Mediotec</label>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="nome-rojeto" class="text-dark ">Nome do Projeto</label>
+                  <input type="text" class="form-control text-dark font100" id="input-nome-projeto" value="Tinta Eterna"
+                    readonly>
+                </div>
+
+                <div class="form-group">
+                  <label for="nome-rojeto" class="text-dark ">Nome do Responsável</label>
+                  <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                    value="Manuel da Nóbrega" readonly>
+                </div>
+
+                <div class="form-group">
+                  <label for="tipo-projeto" class="text-dark ">Tipo do Projeto</label>
+                  <input type="text" class="form-control text-dark font100" id="input-nome-responsavel-projeto"
+                    value="Produto" readonly>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Resumo do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-resumo-projeto" rows="3"
+                    readonly>Resumo...</textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Descrição do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-descricao-projeto" rows="3"
+                    readonly>Descrição...</textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="desc-projeto" class="text-dark ">Equipe do Projeto</label>
+                  <textarea class="form-control text-dark font100" id="textarea-equipe-projeto" rows="3" readonly>Integrante X; Integrante Y; Integrante Z; Integrante W; Integrante H;
+                                                        </textarea>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div> <!-- /EM-AVALIACAO -->
+
+    <!-- AVALIADOS -->
+    <div class="card bg-light border-0">
+      <button type="button" class="btn btn-sm" data-toggle="collapse" data-target="#div-avaliados">
+
+        <div class="card-header bg-light">
+          <h4 class="mb-0 text-center  ">
+            <a class="underline h2">Avaliados</a>
+          </h4>
+        </div>
+      </button>
+
+      <div id="div-avaliados" class="collapsed" data-parent="#accordion-box">
+        <div class="card-body bg-light table-responsive">
+          <table class="table text-dark table-bordered table-hover text-center">
+            <thead class="thead-light">
+              <th scope="col">Nome do Projeto</th>
+              <th scope="col">Tipo de Projeto</th>
+              <th scope="col">Proposta</th>
+              <th scope="col">Origem</th>
+              <th scope="col">Data Aprovação</th>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="clickable-td">Projeto 1</td>
+                <td>TCC Startup</td>
+                <td>Descrição do Projeto 1...</td>
+                <td>Química</td>
+                <td>DD/MM/AA</td>
+              </tr>
+              <tr>
+                <td class="clickable-td">Projeto 2</td>
+                <td>Solicitação interna</td>
+                <td>Descrição do Projeto 2...</td>
+                <td>Informática</td>
+                <td>DD/MM/AA</td>
+              </tr>
+              <tr>
+                <td class="clickable-td">Projeto 3</td>
+                <td>Solicitação externa</td>
+                <td>Descrição do Projeto 3...</td>
+                <td>Empresa XYZ</td>
+                <td>DD/MM/AA</td>
+              </tr>
+            </tbody>
+          </table>
+        </div> <!-- / card-body -->
+      </div>
+    </div> <!-- / AVALIADOS -->
+  </div> <!-- / accordion -->
+</div>
+<script type="text/javascript">
+  const clickable_td = () => {
+    const ck_tds = document.querySelectorAll("td.clickable-td");
+    ck_tds.forEach(td => {
+      td.addEventListener("click", () => {
+        const checkbox = td.querySelectorAll("input.custom-control-input")[0];
+        checkbox.checked = !checkbox.checked;
+      });
+    });
+  };
+  clickable_td();
+
+</script>

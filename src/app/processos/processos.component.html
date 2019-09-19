@@ -1,0 +1,163 @@
+<div class="border-bottom mb-4">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="home">CITEC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="home">Agendas</a>
+        <a class="nav-item nav-link" href="candidatura">Candidatura</a>
+        <a class="nav-item nav-link" href="avaliacao">Avaliação</a>
+        <a class="nav-item nav-link" href="http://cronograma.fiecdev.kinghost.net/#/login">Gestão de projetos</a>
+        <a class="nav-item nav-link active" href="processos">Processos<span class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" href="projetos">Projetos</a>
+        <a (click)="sair()" class="material-icons nav-item nav-link">
+          exit_to_app
+        </a> </div>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  <div class="shadow p-1 mb-1 bg-light">
+    <div class="card bg-dark border-0">
+
+      <div class="card-header bg-light text-center h2">
+        Escolha um modelo
+      </div>
+
+      <div class="card-body bg-light">
+        <div class="row mb-1">
+          <div class="col-sm-5 offset-sm-1">
+            <div class="card border-dark shadow p-1 mb-1 clickable-card" id="planejamento" data-toggle="modal"
+              data-target="#modal-planejamento">
+              <div class="card-body bg-light">
+                <div class="row">
+                  <div class="col-1">
+                    <i class="fas fa-book"></i>
+                  </div>
+                  <div class="col-6 card-title font-weight-bold">
+                    <h5 class="card-title font-weight-bold"> Planejamento </h5>
+                  </div>
+                  <div class="col-1 offset-4">
+                    <h5 class="card-title font-weight-bold">1</h5>
+                  </div>
+                </div>
+                <p class="card-text text-dark">Modelos para plano de projeto</p>
+              </div>
+            </div>
+            <div class="modal" tabindex="-1" role="dialog" id="modal-planejamento">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title">Modelos - Planejamento</h5>
+                  </div>
+                  <div class="modal-body table-responsive">
+                    <table class="table table-hover table-bordered text-center">
+                      <thead>
+                        <th scope="col">Modelos</th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td><a href="#">Planejamento 1</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="#">Planejamento 2</a></td>
+                        </tr>
+                        <tr>
+                          <td><a href="#">Planejamento 3</a></td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="card border-dark shadow p-1 mb-1 clickable-card" id="requisitos">
+              <div class="card-body bg-light">
+                <div class="row">
+                  <div class="col-1">
+                    <i class="fas fa-clipboard"></i>
+                  </div>
+                  <div class="col-6 card-title font-weight-bold">
+                    <h5 class="card-title font-weight-bold">Requisitos</h5>
+                  </div>
+                  <div class="col-1 offset-4">
+                    <h5 class="card-title font-weight-bold">2</h5>
+                  </div>
+                </div>
+                <p class="card-text text-dark">Modelos para listagem de requisitos</p>
+                <!-- <i class="fas fa-cloud-download-alt"></i> -->
+                <!-- <a href="#" class="text-primary">Ver</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row mb-1">
+          <div class="col-sm-5 offset-sm-1">
+            <div class="card border-dark shadow p-1 mb-1 clickable-card" id="desenvolvimento">
+              <div class="card-body bg-light">
+                <div class="row">
+                  <div class="col-1">
+                    <i class="fas fa-location-arrow"></i>
+                  </div>
+                  <div class="col-7 card-title font-weight-bold">
+                    <h5 class="card-title font-weight-bold">Desenvolvimento</h5>
+                  </div>
+                  <div class="col-1 offset-3">
+                    <h5 class="card-title font-weight-bold">3</h5>
+                  </div>
+                </div>
+                <p class="card-text text-dark">Modelos para regras e padrões de desenvolvimento</p>
+                <!-- <a href="#" class="text-primary">Ver</a> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-5">
+            <div class="card border-dark shadow p-1 mb-1 clickable-card" id="entrega-final">
+              <div class="card-body bg-light">
+                <div class="row">
+                  <div class="col-1">
+                    <i class="fas fa-truck"></i>
+                  </div>
+                  <div class="col-6 card-title font-weight-bold">
+                    <h5 class="card-title font-weight-bold">Entrega Final</h5>
+                  </div>
+                  <div class="col-1 offset-4">
+                    <h5 class="card-title font-weight-bold">4</h5>
+                  </div>
+                </div>
+                <p class="card-text text-dark">Modelos para relatório/aceite de entrega final</p>
+                <!-- <a href="#" class="text-primary">Ver</a> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-5 offset-sm-1">
+            <div class="card border-dark shadow p-1 mb-1">
+              <div class="card-body bg-light">
+                <div class="row">
+                  <div class="col-1">
+                    <i class="fas fa-paperclip"></i>
+                  </div>
+                  <div class="col-10 card-title font-weight-bold">
+                    <h5 class="card-title font-weight-bold">Geral</h5>
+                  </div>
+                </div>
+
+                <p class="card-text text-dark">Modelos de uso geral</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div> <!-- / card-body -->
+    </div> <!-- / card -->
+  </div> <!-- / shadow -->
+</div>
