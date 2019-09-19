@@ -45,6 +45,7 @@ export class Fiec1Component implements OnInit {
   public descricaoEvento: string;
   private draggaableDoEvento = false;
   public eventos = [];
+  public resposta = "s";
 
   public eventoCheck = [];
 
@@ -125,25 +126,25 @@ export class Fiec1Component implements OnInit {
         segundo_end: endDoEventoC.getSeconds().toString(),
         descricao: descricaoEventoC
       }
-      if (this.eventoCheck[0]) {
-        this.eventoCheck.forEach(evento => {
-          if (evento.cor == data.cor) {
-            console.log("cor");
-          }
-        })
-      }
-      // this.service.cadastroEvento(data).subscribe(res => {
-      //   if (res.json().status == 500) {
-      //     swal('ERRO', 'Não foi possivel cadastrar o evento', 'warning')
-      //   } else {
-      //     swal('SUCESSO', 'Evento cadastrado com sucesso', 'success').then(function () {
-      //       window.location.reload();
-      //     })
-      //   }
-      // })
+
+      data['end'] = new Date(data.ano_end, data.mes_end, data.dia_end,
+        data.hora_end, data.minuto_end, data.segundo_end, 0)
+      data['start'] = new Date(data.ano_start, data.mes_start, data.dia_start,
+        data.hora_start, data.minuto_start, data.segundo_start, 0)
+
+
+      this.service.cadastroEvento(data).subscribe(res => {
+        if (res.json().status == 500) {
+          swal('ERRO', 'Não foi possivel cadastrar o evento', 'warning')
+        } else {
+          swal('SUCESSO', 'Evento cadastrado com sucesso', 'success').then(function () {
+            window.location.reload();
+          })
+        }
+      })
+    } else {
+      swal('ERRO', 'Campos Vazios', 'warning')
     }
-    // else {
-    //   swal('ERRO', 'Campos Vazios', 'warning')
   }
 
 
