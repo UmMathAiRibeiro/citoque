@@ -861,6 +861,13 @@
                     <textarea class="form-control text-dark font100" id="textarea-equipe-Projeto " rows="3"
                       maxlength="500" #equipe_tcc>{{candidatura.equipe}}</textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="motivo" class="text-dark">Motivo da revisão/Dicas</label>
+                    <textarea class="form-control text-dark font100" id="motivo" rows="3"
+                      disabled>{{candidatura.revisao}}</textarea><small id="motivoHelp"
+                      class="form-text text-muted">Este campo te da dicas e o motivo do porque o projeto foi enviado
+                      para revisão!</small>
+                  </div>
                 </form>
               </div>
               <div class="modal-footer">
@@ -947,6 +954,13 @@
                     <label for="equipe-Projeto " class="text-dark ">Equipe do Projeto </label>
                     <textarea class="form-control text-dark font100" id="equipe-Projeto" #equipe_interno rows="3"
                       maxlength="1000">{{candidatura.equipe}}</textarea>
+                  </div>
+                  <div class="form-group">
+                    <label for="motivo" class="text-dark">Motivo da revisão/Dicas</label>
+                    <textarea class="form-control text-dark font100" id="motivo" rows="3"
+                      disabled>{{candidatura.revisao}}</textarea><small id="motivoHelp"
+                      class="form-text text-muted">Este campo te da dicas e o motivo do porque o projeto foi enviado
+                      para revisão!</small>
                   </div>
                 </form>
               </div>
@@ -1052,11 +1066,17 @@
                     <textarea class="form-control text-dark font100" #equipe_externo id="textarea-equipe-projeto"
                       rows="3" maxlength="1000">{{candidatura.equipe}}</textarea>
                   </div>
+                  <div class="form-group">
+                    <label for="motivo" class="text-dark">Motivo da revisão/Dicas</label>
+                    <textarea class="form-control text-dark font100" id="motivo" rows="3"
+                      disabled>{{candidatura.revisao}}</textarea><small id="motivoHelp"
+                      class="form-text text-muted">Este campo te da dicas e o motivo do porque o projeto foi enviado
+                      para revisão!</small>
+                  </div>
                 </form>
               </div>
               <div class="modal-footer">
                 <button class="btn btn-primary" (click)="reenviarExterno()">Reenviar</button>
-
               </div>
             </div>
           </div>
