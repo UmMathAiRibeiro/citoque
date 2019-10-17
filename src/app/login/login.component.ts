@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
       }
       this.service.logar(data).subscribe(res => {
         if (res.json().status == 200) {
-          let id = res.json().result[0].iduser
           if (res.json().count[0].count == 1) {
+            let id = res.json().result[0].iduser
             localStorage.setItem('010101', id);
             this.router.navigate(['home'])
           } else {

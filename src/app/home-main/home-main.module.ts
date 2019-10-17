@@ -12,15 +12,18 @@ import { registerLocaleData } from '@angular/common';
 import { HttpModule } from '@angular/http';
 import { BackendService } from '../backend.service';
 import { Fiec2Component } from './fiec2/fiec2.component';
+import { AppRoutingModule } from '../app-routing.module';
 
 
 registerLocaleData(localePt);
 @NgModule({
     declarations: [HomeMainComponent, Fiec1Component, Fiec2Component],
     imports: [
+        // tslint:disable-next-line: deprecation
         HttpModule,
         CommonModule,
         FormsModule,
+        AppRoutingModule,
         FlatpickrModule.forRoot(),
         CalendarModule.forRoot({
             provide: DateAdapter,

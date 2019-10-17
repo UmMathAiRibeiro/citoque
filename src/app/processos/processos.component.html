@@ -7,15 +7,17 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="home">Agendas</a>
-        <a class="nav-item nav-link" href="candidatura">Candidatura</a>
-        <a class="nav-item nav-link" href="avaliacao">Avaliação</a>
+        <a class="nav-item nav-link" [routerLink]="[ '/home' ]">Agendas</a>
+        <a class="nav-item nav-link" [routerLink]="[ '/candidatura' ]">Candidatura</a>
+        <a class="nav-item nav-link" [routerLink]="[ '/avaliacao' ]">Avaliação</a>
         <a class="nav-item nav-link" href="http://cronograma.fiecdev.kinghost.net/#/login">Gestão de projetos</a>
-        <a class="nav-item nav-link active" href="processos">Processos<span class="sr-only">(current)</span></a>
-        <a class="nav-item nav-link" href="projetos">Projetos</a>
+        <a class="nav-item nav-link active" [routerLink]="[ '/processos' ]">Processos<span
+            class="sr-only">(current)</span></a>
+        <a class="nav-item nav-link" [routerLink]="[ '/projetos' ]">Projetos</a>
         <a (click)="sair()" class="material-icons nav-item nav-link">
           exit_to_app
-        </a> </div>
+        </a>
+      </div>
     </div>
   </nav>
 </div>

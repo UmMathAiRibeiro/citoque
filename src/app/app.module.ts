@@ -12,10 +12,8 @@ import { CalendarModule, DateAdapter } from 'angular-calendar';
 import 'flatpickr/dist/flatpickr.css';
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
-import { HomeMainComponent } from './home-main/home-main.component';
 import localePt from '@angular/common/locales/pt-PT';
 import { registerLocaleData } from '@angular/common';
-import { Fiec1Component } from './home-main/fiec1/fiec1.component';
 import { HomeMainModule } from './home-main/home-main.module';
 import { CandidaturaMainComponent } from './candidatura-main/candidatura-main.component';
 import { AvaliacaoComponent } from './avaliacao/avaliacao.component';
@@ -37,6 +35,7 @@ registerLocaleData(localePt);
     HomeMainModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    // tslint:disable-next-line: deprecation
     HttpModule,
     FormsModule,
     FlatpickrModule.forRoot(),

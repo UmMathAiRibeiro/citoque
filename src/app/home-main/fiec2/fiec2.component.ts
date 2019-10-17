@@ -1,11 +1,10 @@
-import { Component, OnInit, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
-import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { isSameDay, isSameMonth } from 'date-fns';
 import { Subject } from 'rxjs';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView, CalendarDateFormatter, DateFormatterParams } from 'angular-calendar';
+import { CalendarEvent, CalendarView, CalendarDateFormatter } from 'angular-calendar';
 import { DAYS_OF_WEEK } from 'angular-calendar';
 import { CustomDateFormatter } from '../custom-date-formatter.provider';
 import swal from 'sweetalert';
-import { Router } from '@angular/router';
 import { BackendService } from '../../backend.service';
 
 
@@ -20,6 +19,10 @@ const colors: any = {
   },
   yellow: {
     primary: '#e3bc08',
+    secondary: '#FDF1BA'
+  },
+  all: {
+    primary: '#808080',
     secondary: '#FDF1BA'
   }
 };
@@ -45,6 +48,9 @@ export class Fiec2Component implements OnInit {
   public descricaoEvento: string;
   private draggaableDoEvento = false;
   public eventos = [];
+  public resposta = "s";
+
+  public eventoCheck = [];
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
   view: CalendarView = CalendarView.Month;
@@ -58,9 +64,6 @@ export class Fiec2Component implements OnInit {
     action: string;
     event: CalendarEvent;
   };
-  // // erro
-  // actions: CalendarEventAction[] = [];
-  // // erro
   refresh: Subject<any> = new Subject();
   events: CalendarEvent[] = [];
   activeDayIsOpen: boolean = false;
@@ -69,32 +72,44 @@ export class Fiec2Component implements OnInit {
 
   ngOnInit() {
     this.service.selectEventosFiec2().subscribe(res => {
-      res.json().result.forEach(evento => {
-        console.log(evento)
-        if (evento.cor == "blue") {
-          var corT = colors.blue
-        }
-        if (evento.cor == "yellow") {
-          var corT = colors.yellow
-        }
-        if (evento.cor == "red") {
-          var corT = colors.red
-        }
-        this.events = [
-          ...this.events, {
-            id: evento.idevento,
-            start: new Date(evento.ano_start, evento.mes_start, evento.dia_start, evento.hora_start, evento.minuto_start, evento.segundo_start),
-            end: new Date(evento.ano_end, evento.mes_end, evento.dia_end, evento.hora_end, evento.minuto_end, evento.segundo_end),
-            title: evento.titulo,
-            color: corT,
-            draggable: this.draggaableDoEvento,
-            resizable: {
-              beforeStart: true,
-              afterEnd: true
-            }
+      if (res.json().status !== 200) {
+        swal('Não foi possivel carregar a página (CONTATE O SETOR DE DESENVOLVIMENTO), status: '
+          + res.json().status + ', erro: '
+          + res.json().result.code + ": " + res.json().result.errno, 'error')
+      } else {
+        res.json().result.forEach(evento => {
+          this.eventoCheck.push(evento);
+          if (evento.cor == "blue") {
+            var corT = colors.blue
           }
-        ]
-      });// console.log(this.events);
+          if (evento.cor == "yellow") {
+            var corT = colors.yellow
+          }
+          if (evento.cor == "red") {
+            var corT = colors.red
+          }
+          if (evento.cor == "all") {
+            var corT = colors.all
+          }
+          this.events = [
+            ...this.events, {
+              id: evento.idevento,
+              start: new Date(evento.ano_start, evento.mes_start, evento.dia_start,
+                evento.hora_start, evento.minuto_start, evento.segundo_start),
+              end: new Date(evento.ano_end, evento.mes_end, evento.dia_end, evento.hora_end,
+                evento.minuto_end, evento.segundo_end),
+              title: evento.titulo,
+              color: corT,
+              draggable: this.draggaableDoEvento,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              }
+            }
+          ]
+        });
+        console.log(this.eventoCheck);
+      }
     })
   }
 
@@ -122,25 +137,92 @@ export class Fiec2Component implements OnInit {
         segundo_end: endDoEventoC.getSeconds().toString(),
         descricao: descricaoEventoC
       }
-      this.service.cadastroEvento(data).subscribe(res => {
-        if (res.json().status == 500) {
-          swal('ERRO', 'Não foi possivel cadastrar o evento', 'warning')
-        } else {
-          swal('SUCESSO', 'Evento cadastrado com sucesso', 'success').then(function () {
-            window.location.reload();
-          })
+
+      data['end'] = new Date(data.ano_end, data.mes_end, data.dia_end,
+        data.hora_end, data.minuto_end, data.segundo_end, 0);
+      data['start'] = new Date(data.ano_start, data.mes_start, data.dia_start,
+        data.hora_start, data.minuto_start, data.segundo_start, 0);
+
+      let resposta = "s"
+      this.eventoCheck.forEach(evento => {
+        if (evento.cor == data.cor || evento.cor == "all" || data.cor == "all") {
+          resposta = "n"
+          if (
+            (parseInt(evento.ano_start) == parseInt(data.ano_start)
+              && parseInt(evento.mes_start) == parseInt(data.mes_start)
+              && parseInt(evento.dia_start) == parseInt(data.dia_start))
+            || (parseInt(evento.ano_end) == parseInt(data.ano_start)
+              && parseInt(evento.mes_end) == parseInt(data.mes_start)
+              && parseInt(evento.dia_end) == parseInt(data.dia_start))
+            || (parseInt(evento.ano_end) == parseInt(data.ano_end)
+              && parseInt(evento.mes_end) == parseInt(data.mes_end)
+              && parseInt(evento.dia_end) == parseInt(data.dia_end))
+            || (parseInt(evento.ano_start) == parseInt(data.ano_end)
+              && parseInt(evento.mes_start) == parseInt(data.mes_end)
+              && parseInt(evento.dia_start) == parseInt(data.dia_end))
+          ) {
+
+            if (parseInt(evento.hora_start) >= parseInt(data.hora_end)
+              && parseInt(evento.minuto_start) >= parseInt(data.minuto_end)
+              && parseInt(evento.segundo_start) >= parseInt(data.segundo_end)) {
+              resposta = "s"
+            }
+            if (parseInt(evento.hora_end) <= parseInt(data.hora_start)
+              && parseInt(evento.minuto_end) <= parseInt(data.minuto_start)
+              && parseInt(evento.segundo_end) <= parseInt(data.segundo_start)) {
+              resposta = "s"
+            }
+            if (parseInt(evento.hora_end) == parseInt(data.hora_end)
+              && parseInt(evento.minuto_end) == parseInt(data.minuto_end)
+              && parseInt(evento.segundo_end) == parseInt(data.segundo_end)
+              && parseInt(evento.hora_start) == parseInt(data.hora_start)
+              && parseInt(evento.minuto_start) == parseInt(data.minuto_start)
+              && parseInt(evento.segundo_start) == parseInt(data.segundo_start)) {
+              resposta = "n"
+            }
+          } else {
+            resposta = "s"
+          }
         }
       })
-    }
-    else {
+
+      if (parseInt(data.ano_end) <= parseInt(data.ano_start)
+        && parseInt(data.mes_end) <= parseInt(data.mes_start)
+        && parseInt(data.dia_end) <= parseInt(data.dia_start)
+        && parseInt(data.hora_end) <= parseInt(data.hora_start)
+        && parseInt(data.minuto_end) <= parseInt(data.minuto_start)
+        && parseInt(data.segundo_end) <= parseInt(data.segundo_start)) {
+        swal('ERRO', 'A data inicial do evento deve ser menor do que a data final do evento', 'warning')
+      } else {
+        if (resposta == "s") {
+          this.service.cadastroEvento(data).subscribe(res => {
+            if (res.json().status !== 200) {
+              swal('ERRO', 'Não foi possivel cadastrar o evento (CONTATE O SETOR DE DESENVOLVIMENTO), status: '
+                + res.json().status + ', erro: '
+                + res.json().result.code + ": " + res.json().result.errno, 'error')
+            } else {
+              swal('SUCESSO', 'Evento cadastrado com sucesso', 'success').then(function () {
+                window.location.reload();
+              })
+            }
+          })
+        } else {
+          swal('ERRO', 'Já existe uma reserva deste setor nesse horario', 'warning')
+        }
+      }
+    } else {
       swal('ERRO', 'Campos Vazios', 'warning')
     }
   }
+
+
   deleteEvento(event) {
     this.events.push(event);
     this.service.deleteEvento(event.id).subscribe(res => {
-      if (res.json().status == 500) {
-        swal('ERRO', 'Não foi possivel excluir o item', 'warning');
+      if (res.json().status !== 200) {
+        swal('ERRO', 'Não foi possivel excluir o item (CONTATE O SETOR DE DESENVOLVIMENTO), status: '
+          + res.json().status + ', erro: '
+          + res.json().result.code + ": " + res.json().result.errno, 'error');
         console.log(res);
       } else {
         this.deleteEvent(event)
@@ -155,48 +237,56 @@ export class Fiec2Component implements OnInit {
   eventClicked({ event }: { event: CalendarEvent }): void {
     this.eventos = [];
     this.service.selectEventosFiec2().subscribe(res => {
-      res.json().result.forEach(evento => {
-        if (evento.cor == "blue") {
-          var corT = colors.blue
-        }
-        if (evento.cor == "yellow") {
-          var corT = colors.yellow
-        }
-        if (evento.cor == "red") {
-          var corT = colors.red
-        }
-        if (evento.idevento == event.id) {
-          if (evento.minuto_end == '0') {
-            evento.minuto_end = '00'
+      if (res.json().status !== 200) {
+        swal('Não foi possivel carregar o evento (CONTATE O SETOR DE DESENVOLVIMENTO), status: '
+          + res.json().status + ', erro: '
+          + res.json().result.code + ": " + res.json().result.errno, 'error')
+      } else {
+        res.json().result.forEach(evento => {
+          if (evento.cor == "blue") {
+            var corT = colors.blue
           }
-          if (evento.segundo_end == '0') {
-            evento.segundo_end = '00'
+          if (evento.cor == "yellow") {
+            var corT = colors.yellow
           }
-          if (evento.hora_end == '0') {
-            evento.hora_end = '00'
+          if (evento.cor == "red") {
+            var corT = colors.red
           }
-          if (evento.minuto_start == '0') {
-            evento.minuto_start = '00'
-          }
-          if (evento.segundo_start == '0') {
-            evento.segundo_start = '00'
-          }
-          if (evento.hora_start == '0') {
-            evento.hora_start = '00'
-          }
-          this.eventos = [
-            ...this.eventos, {
-              id: evento.idevento,
-              start: evento.dia_start + "/" + evento.mes_start + "/" + evento.ano_start + " ás " + evento.hora_start + ":" + evento.minuto_start + ":" + evento.segundo_start,
-              end: evento.dia_end + "/" + evento.mes_end + "/" + evento.ano_end + " ás " + evento.hora_end + ":" + evento.minuto_end + ":" + evento.segundo_end,
-              title: evento.titulo,
-              color: corT,
-              descricao: evento.descricao
+          if (evento.idevento == event.id) {
+            if (evento.minuto_end.length == 1) {
+              evento.minuto_end = '0' + evento.minuto_end
             }
-          ]
-          this.telaEvento = !this.telaEvento;
-        }
-      })
+            if (evento.minuto_start.length == 1) {
+              evento.minuto_start = '0' + evento.minuto_start
+            }
+            if (evento.segundo_end.length == 1) {
+              evento.segundo_end = '0' + evento.segundo_end
+            }
+            if (evento.segundo_start.length == 1) {
+              evento.segundo_start = '0' + evento.segundo_start
+            }
+            if (evento.hora_start.length == 1) {
+              evento.hora_start = '0' + evento.hora_start
+            }
+            if (evento.hora_end.length == 1) {
+              evento.hora_end = '0' + evento.hora_end
+            }
+            this.eventos = [
+              ...this.eventos, {
+                id: evento.idevento,
+                start: evento.dia_start + "/" + evento.mes_start + "/" + evento.ano_start
+                  + " ás " + evento.hora_start + ":" + evento.minuto_start + ":" + evento.segundo_start,
+                end: evento.dia_end + "/" + evento.mes_end + "/" + evento.ano_end + " ás "
+                  + evento.hora_end + ":" + evento.minuto_end + ":" + evento.segundo_end,
+                title: evento.titulo,
+                color: corT,
+                descricao: evento.descricao
+              }
+            ]
+          }
+        })
+        document.getElementById('modalEventoBtn2').click();
+      }
     })
   }
 
@@ -213,26 +303,7 @@ export class Fiec2Component implements OnInit {
       this.viewDate = date;
     }
   }
-  // eventTimesChanged({
-  //   event,
-  //   newStart,
-  //   newEnd
-  // }: CalendarEventTimesChangedEvent): void {
-  //   this.events = this.events.map(iEvent => {
-  //     if (iEvent === event) {
-  //       return {
-  //         ...event,
-  //         start: newStart,
-  //         end: newEnd
-  //       };
-  //     }
-  //     return iEvent;
-  //   });
-  //   this.handleEvent('Dropped or resized', event);
-  // }
-  // handleEvent(action: string, event: CalendarEvent): void {
 
-  // }
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter(event => event !== eventToDelete);
   }

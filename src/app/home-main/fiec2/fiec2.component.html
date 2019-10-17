@@ -99,7 +99,43 @@
   </table>
 </div>
 <br />
-
+<button data-toggle="modal" hidden id="modalEventoBtn2" data-target="#modalEvento2">
+</button>
+<div class="modal fade" id="modalEvento2" tabindex="-1" role="dialog" aria-labelledby="modalEventoLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEventoLabel"><span *ngFor="let evento of eventos">{{evento.title}}</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="font120">
+          <div class="form-group">
+            <label class="text-dark">Começo do evento</label>
+            <textarea *ngFor="let evento of eventos" class="form-control text-dark font100" rows="1"
+              disabled>{{evento.start}}</textarea>
+          </div>
+          <div class="form-group">
+            <label class="text-dark">Fim do evento</label>
+            <textarea *ngFor="let evento of eventos" class="form-control text-dark font100" rows="1"
+              disabled>{{evento.end}}</textarea>
+          </div>
+          <div class="form-group">
+            <label class="text-dark ">Descrição do evento</label>
+            <textarea class="form-control text-dark font100" *ngFor="let evento of eventos" rows="3"
+              disabled>{{evento.descricao}}</textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- MODAL CADASTRO EVENTOS -->
 <div class="modal fade " id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -144,11 +180,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Cor do evento</label>
+            <label for="exampleFormControlSelect1">Setor a ser reservado:</label>
             <select name="color" [(ngModel)]="colorDoEvento" class="form-control" id="exampleFormControlSelect1">
-              <option selected value="red" class="text-danger">Vermelho</option>
-              <option value="blue" class="text-primary">Azul</option>
-              <option value="yellow" class="text-warning">Amarelo</option>
+              <option selected value="red" class="text-danger">Palestras</option>
+              <option value="blue" class="text-primary">Pesquisas, desenvolvimento</option>
+              <option value="yellow" class="text-warning">Reuniões</option>
+              <option value="all">Todo o espaço</option>
             </select>
           </div>
           <div class="form-group">
@@ -162,36 +199,6 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
         <button type="submit" class="btn btn-outline-dark"
           (click)="cadastroEvento(titleDoEvento,startDoEvento,endDoEvento,colorDoEvento,descricaoEvento)">Adicionar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div *ngIf="telaEvento">
-  <div class="container telaEvento shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="row m-1">
-      <div class="col">
-        <button type="button" (click)="telaEventoHide()" class="btn btn-outline-danger">X</button>
-      </div>
-      <div class="col">
-        <span *ngFor="let evento of eventos">{{evento.title}}</span>
-      </div>
-    </div>
-    <div class="row m-4">
-      <div class="col">
-        Começo:
-        <span *ngFor="let evento of eventos">{{evento.start}}</span>
-      </div>
-    </div>
-    <div class="row m-4">
-      <div class="col">
-        Fim:
-        <span *ngFor="let evento of eventos">{{evento.end}}</span>
-      </div>
-    </div>
-    <div class="row m-4">
-      <div class="col">
-        Descricao:
-        <span *ngFor="let evento of eventos">{{evento.descricao}}</span>
       </div>
     </div>
   </div>

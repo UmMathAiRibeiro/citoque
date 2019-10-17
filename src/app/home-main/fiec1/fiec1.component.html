@@ -1,3 +1,4 @@
+<!-- CALENDÁRIO -->
 <div class="calendario container">
   <div class="text-center m-4">
     <span class="unidade">FIEC I</span>
@@ -50,8 +51,9 @@
     (eventClicked)="eventClicked($event)" [locale]="locale" [refresh]="refresh">
   </mwl-calendar-day-view>
 </div>
+<!-- /CALENDÁRIO -->
 <br /><br /><br />
-
+<!-- EDIÇÕES DOS EVENTOS /  ADICIONAR EVENTOS -->
 <h3>
   Edite os eventos
   <button class="btn btn btn-outline-dark pull-right" data-toggle="modal" data-target="#exampleModal">
@@ -100,7 +102,46 @@
   </table>
 </div>
 <br />
-
+<!-- /EDIÇÕES DOS EVENTOS /  ADICIONAR EVENTOS -->
+<!-- MODAL DESCRICAO EVENTO -->
+<button data-toggle="modal" hidden id="modalEventoBtn" data-target="#modalEvento">
+</button>
+<div class="modal fade" id="modalEvento" tabindex="-1" role="dialog" aria-labelledby="modalEventoLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEventoLabel"><span *ngFor="let evento of eventos">{{evento.title}}</span></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="font120">
+          <div class="form-group">
+            <label class="text-dark">Começo do evento</label>
+            <textarea *ngFor="let evento of eventos" class="form-control text-dark font100" rows="1"
+              disabled>{{evento.start}}</textarea>
+          </div>
+          <div class="form-group">
+            <label class="text-dark">Fim do evento</label>
+            <textarea *ngFor="let evento of eventos" class="form-control text-dark font100" rows="1"
+              disabled>{{evento.end}}</textarea>
+          </div>
+          <div class="form-group">
+            <label class="text-dark ">Descrição do evento</label>
+            <textarea class="form-control text-dark font100" *ngFor="let evento of eventos" rows="3"
+              disabled>{{evento.descricao}}</textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /MODAL DESCRICAO EVENTO -->
 <!-- MODAL CADASTRO EVENTOS -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
   aria-hidden="true">
@@ -145,11 +186,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Cor do evento</label>
+            <label for="exampleFormControlSelect1">Setor a ser reservado:</label>
             <select name="color" [(ngModel)]="colorDoEvento" class="form-control" id="exampleFormControlSelect1">
-              <option selected value="red" class="text-danger">Vermelho</option>
-              <option value="blue" class="text-primary">Azul</option>
-              <option value="yellow" class="text-warning">Amarelo</option>
+              <option selected value="red" class="text-danger">Palestras</option>
+              <option value="blue" class="text-primary">Pesquisas, desenvolvimento</option>
+              <option value="yellow" class="text-warning">Reuniões</option>
+              <option value="all">Todo o espaço</option>
             </select>
           </div>
           <div class="form-group">
@@ -168,33 +210,4 @@
     </div>
   </div>
 </div>
-<div *ngIf="telaEvento">
-  <div class="container telaEvento shadow-lg p-3 mb-5 bg-white rounded">
-    <div class="row m-1">
-      <div class="col">
-        <button type="button" (click)="telaEventoHide()" class="btn btn-outline-danger">X</button>
-      </div>
-      <div class="col">
-        <span *ngFor="let evento of eventos">{{evento.title}}</span>
-      </div>
-    </div>
-    <div class="row m-4">
-      <div class="col">
-        Começo:
-        <span *ngFor="let evento of eventos">{{evento.start}}</span>
-      </div>
-    </div>
-    <div class="row m-4">
-      <div class="col">
-        Fim:
-        <span *ngFor="let evento of eventos">{{evento.end}}</span>
-      </div>
-    </div>
-    <div class="row m-4">
-      <div class="col">
-        Descricao:
-        <span *ngFor="let evento of eventos">{{evento.descricao}}</span>
-      </div>
-    </div>
-  </div>
-</div>
+<!-- MODAL CADASTRO EVENTOS -->
