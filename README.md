@@ -18,7 +18,7 @@ Feito isso, vá na pasta do projeto e instale as dependências:
 npm install
 ```
 
-As dependências são encontradas no arquivo package.json:
+As dependências são encontradas no arquivo package.json: BATATA
 
 {% code title="package.json" %}
 ```javascript
